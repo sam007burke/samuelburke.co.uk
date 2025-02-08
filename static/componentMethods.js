@@ -1,4 +1,4 @@
-import { additionalComponents } from "./index.js";
+import {additionalComponents, defineAnchorBehaviour} from "./index.js";
 
 /* ================================ CONSTANTS =============================== */
 const BLOG_URI_REGEX = /^\/blogs\/(?<blog_name>.*)/;
@@ -34,8 +34,7 @@ const onLoads = {
     home: (page) => {
     },
 
-    blog: (page) => {
-        console.log("loading blog page")
+    blog: async (page) => {
         const pageContent = page.querySelector('div.content');
 
         // clear page
@@ -44,46 +43,40 @@ const onLoads = {
         }
 
         // loading shite
-        page.append(additionalComponents.loader);
+        document.querySelector("main").append(additionalComponents.loader);
 
         const { blog_name: blogName } = BLOG_URI_REGEX.exec(decodeURIComponent(window.location.pathname)).groups;
         const ajaxPath = BLOG_LOCATIONS + blogName + PAGE_FILE_EXT;
-        fetch(ajaxPath)
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error(`Ajax Error: ${ajaxPath} Status ${res.status} ${res.statusText}`);
+
+        try {
+            const res = await fetch(ajaxPath);
+            if (res.status === 404) return 404;
+            if (!res.ok) {
+                throw new Error(`Ajax Error: ${ajaxPath} Status ${res.status} ${res.statusText}`);
+            }
+            const html = await res.text();
+
+            // remove loader
+            additionalComponents.loader.remove();
+
+            // parse fetched document and add to dom
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            document.title = doc.title;
+            doc.body.childNodes.forEach(element => {
+                if (element.nodeType === 1) { // normal node
+                    pageContent.append(element);
                 }
-                return res.text();
-            }).then(html => {
-
-                // remove loader
-                additionalComponents.loader.remove();
-
-                // parse fetched document and add to dom
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                document.title = doc.title;
-                doc.body.childNodes.forEach(element => {
-                    if (element.nodeType === 1) { // normal node
-                        pageContent.append(element);
-                    }
-                    else if (element.nodeType === 3) { // text node
-                        pageContent.append(document.createTextNode(element.textContent));
-                    }
-                });
-
-                // Stop a[spa] tags from reloading the page
-                doc.querySelectorAll("a[spa]").forEach(aTag => {
-                    aTag.onclick = e => {
-                        e.preventDefault();
-                        console.log("navigating to spa page: " + aTag.href)
-                        history.pushState({}, "", aTag.href);
-                    };
-                });
-                console.log("loaded blog " + document.title)
-            }).catch(error => {
-                console.error(error);
+                else if (element.nodeType === 3) { // text node
+                    pageContent.append(document.createTextNode(element.textContent));
+                }
             });
+
+            defineAnchorBehaviour(doc);
+
+        } catch (e) {
+            console.error(e);
+        }
     }
 };
 

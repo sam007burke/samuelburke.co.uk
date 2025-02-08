@@ -2,30 +2,43 @@ import Router from "./customElements/Router.js";
 import Route from "./customElements/Route.js";
 
 export const additionalComponents = {};
-console.log('index.js')
+
+
+
+//      ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+//      ┃                       MAIN METHOD                        ┃
+//      ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
 const main = () => {
 
-    // Stop a[spa] tags from reloading the page
-    document.querySelectorAll("a[spa]").forEach(aTag => {
-        aTag.onclick = e => {
-            e.preventDefault();
-            console.log("navigating to spa page: " + aTag.href)
-            history.pushState({}, "", aTag.href);
-        };
-    });
+    defineAnchorBehaviour(document);
 
     // load in the additional components
     const additionalComponentsDiv = document.querySelector('div#additional-components');
     additionalComponentsDiv.childNodes.forEach(component => {
         if (component.nodeType !== 1) return;
         additionalComponents[component.id] = component;
-        console.log("loaded " + component.id)
     });
     additionalComponentsDiv.remove();
 
     // finally, load whatever page we are on
     Router.instance.loadPage();
 };
+
+
+//      ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+//      ┃              SPA LINKS DO NOT CAUSE RELOAD               ┃
+//      ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+export const defineAnchorBehaviour = (doc) => {
+    // Stop a[spa] tags from reloading the page
+    doc.querySelectorAll("a[spa]").forEach(aTag => {
+        aTag.onclick = e => {
+            e.preventDefault();
+            history.pushState({}, "", aTag.href);
+        };
+    });
+}
 
 // Override history.pushState, so that the router can listen for it
 const originalPushState = history.pushState;
@@ -36,6 +49,11 @@ history.pushState = (...args) => {
 window.onpopstate = () => {
     window.dispatchEvent(new Event('pushstate'));
 };
+
+
+//      ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+//      ┃                     THE HASH ROUTER                      ┃
+//      ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 // The hash router is a custom element.
 // This app expects there to be a single hash router defined within the body

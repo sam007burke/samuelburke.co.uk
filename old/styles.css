@@ -1,0 +1,267 @@
+/* -------------------------------------------------------------------------- */
+/*                                  VARIABLES                                 */
+/* -------------------------------------------------------------------------- */
+
+:root {
+    --box-shadow-size: .2rem;
+    --transition-time: .2s;
+
+    --colour-primary: #353535;
+    --colour-secondary: #6d8ed6;
+    --colour-secondary-darkened: #424f6b;
+    --colour-background: #e4eaf1;
+    --colour-background-darkened: #dbdfe9;
+    --colour-accent: #251f69;
+    --colour-text: #1f1f1f;
+    --colour-text-shade: #614015;
+    --colour-text-secondary: #ffffff;
+    --colour-text-secondary-shade: #a1a1a1;
+    --colour-border: #505050;
+    --colour-shadow: #13131638;
+    --colour-danger: #b80000;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                GLOBAL STYLES                               */
+/* -------------------------------------------------------------------------- */
+
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                               BODY AND LAYOUT                              */
+/* -------------------------------------------------------------------------- */
+
+body {
+    background-color: var(--colour-background);
+    color: var(--colour-text);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+main {
+    display: block;
+    flex-grow: 1;
+    margin: 0;
+    padding: 1rem;
+}
+
+#below-header {
+    display: block;
+    flex-grow: 1;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#main-and-footer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.flex-grow {
+    flex-grow: 1;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   HEADER                                   */
+/* -------------------------------------------------------------------------- */
+
+header {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    gap: 1rem;
+    background-color: var(--colour-secondary);
+    width: 100vw;
+    padding: 1rem;
+    box-sizing: border-box;
+    box-shadow: 0 var(--box-shadow-size) var(--box-shadow-size) var(--colour-shadow);
+    text-wrap: nowrap;
+    border-bottom: 1px solid var(--colour-border);
+}
+
+header > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.header-logo {
+    height: 2rem;
+    display: inline;
+    margin-right: 1rem;
+}
+
+header > div > a.st-andrews {
+    text-decoration: none;
+    width: 100%;
+    display: flex;
+}
+
+header nav {
+    color: inherit
+}
+
+header nav a {
+    display: inline-block;
+    text-decoration: inherit;
+    color: inherit;
+    margin-right: 1rem;
+    border: 1px solid var(--colour-border);
+    box-sizing: border-box;
+    padding: .4rem .7rem;
+}
+
+header nav a:hover {
+    color: var(--colour-text-secondary);
+    background-color: var(--colour-primary);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   FOOTER                                   */
+/* -------------------------------------------------------------------------- */
+
+footer {
+    background-color: var(--colour-secondary);
+    border-top: 1px solid var(--colour-border);
+    padding: .5rem 1rem;
+    box-shadow: 0 0 var(--box-shadow-size) var(--colour-shadow);
+}
+
+footer a:hover {
+    color: var(--colour-text-shade);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                  ELEMENTS                                  */
+/* -------------------------------------------------------------------------- */
+
+h1 {
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+}
+
+h2 {
+    font-size: 1.3rem;
+    margin: 0 0 1rem 0;
+}
+
+li {
+    margin-top: .5rem;
+}
+
+a {
+    color: inherit;
+    transition: var(--transition-time);
+}
+
+.no-decor {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+button {
+    width: 10rem;
+    padding: .7rem;
+    margin: .7rem 0;
+    font-size: 1.1rem;
+    border: 1px solid var(--colour-border);
+    background-color: var(--colour-primary);
+    color: var(--colour-text-secondary);
+    cursor: pointer;
+    transition: var(--transition-time);
+}
+
+button.remove {
+    background-color: var(--colour-danger);
+    margin-top: 2rem;
+}
+
+button:hover {
+    background-color: var(--colour-secondary);
+    color: var(--colour-text);
+}
+
+button:active {
+    background-color: var(--colour-accent);
+}
+
+textarea {
+    height: 10rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                    FORM                                    */
+/* -------------------------------------------------------------------------- */
+
+form {
+    max-width: 30rem;
+    background-color: var(--colour-background-darkened);
+    margin: 0 auto;
+    padding: 2rem;
+    border: 1px solid var(--colour-border);
+    box-shadow: var(--box-shadow-size) var(--box-shadow-size) var(--box-shadow-size) var(--colour-shadow);
+}
+
+form input, form textarea, form select, form button {
+    width: 100%;
+    box-sizing: border-box;
+    resize: none;
+    padding: .7rem;
+    margin: .7rem 0;
+    font-size: 1.1rem;
+}
+
+input, textarea, select {
+    background-color: var(--colour-background);
+    border: 1px solid var(--colour-border);
+    color: var(--colour-text);
+    box-shadow: inset .1rem .1rem .1rem var(--colour-shadow);
+    min-width: 5rem;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--colour-primary);
+    outline: none;
+    box-shadow: 0 0 .1rem var(--colour-primary);
+}
+
+/* ========================================================================== */
+/*                               LOADER SPINNER                               */
+/* ========================================================================== */
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    border: 10px solid;
+    box-sizing: border-box;
+    animation: animloader 1s linear infinite alternate;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+  }
+  @keyframes animloader {
+    0% {
+      border-color: var(--colour-secondary) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+    }
+    33% {
+      border-color: var(--colour-secondary) var(--colour-secondary) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+    }
+    66% {
+      border-color: var(--colour-secondary) var(--colour-secondary) var(--colour-secondary) rgba(255, 255, 255, 0);
+    }
+    100% {
+      border-color: var(--colour-secondary) var(--colour-secondary) var(--colour-secondary) var(--colour-secondary);
+    }
+  } 

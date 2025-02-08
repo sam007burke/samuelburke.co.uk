@@ -1,237 +1,131 @@
-/* -------------------------------------------------------------------------- */
-/*                                  VARIABLES                                 */
-/* -------------------------------------------------------------------------- */
-
+/* Define color scheme for easy control */
 :root {
-    --box-shadow-size: .2rem;
-    --transition-time: .2s;
-
-    --colour-primary: #353535;
-    --colour-secondary: #6d8ed6;
-    --colour-secondary-darkened: #424f6b;
-    --colour-background: #e4eaf1;
-    --colour-background-darkened: #dbdfe9;
-    --colour-accent: #251f69;
-    --colour-text: #1f1f1f;
-    --colour-text-shade: #614015;
-    --colour-text-secondary: #ffffff;
-    --colour-text-secondary-shade: #a1a1a1;
-    --colour-border: #505050;
-    --colour-shadow: #13131638;
-    --colour-danger: #b80000;
+    --bg-colour: #12100e;
+    --bg-colour-hover: #1c1902;
+    --text-colour: #D4DF9E;
+    --accent-colour: #6B654B;
+    --secondary-colour: #4A4B2F;
+    --tile-bg: #30321C;
+    --tile-border: #4A4B2F;
+    --tile-shadow: #22231c;
+    --font-mono: 'Press Start 2P', monospace;
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                GLOBAL STYLES                               */
-/* -------------------------------------------------------------------------- */
-
-* {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin: 0;
-}
-
-/* -------------------------------------------------------------------------- */
-/*                               BODY AND LAYOUT                              */
-/* -------------------------------------------------------------------------- */
-
+/* Apply dark mode styles */
 body {
-    background-color: var(--colour-background);
-    color: var(--colour-text);
+    background-color: var(--bg-colour);
+    color: var(--text-colour);
+    font-family: var(--font-mono);
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
 }
 
 main {
-    display: block;
-    flex-grow: 1;
-    margin: 0;
-    padding: 1rem;
-}
-
-#below-header {
-    display: block;
-    flex-grow: 1;
-    overflow-x: hidden;
-    overflow-y: scroll;
-}
-
-#main-and-footer {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-}
-
-.flex-grow {
     flex-grow: 1;
 }
-
-/* -------------------------------------------------------------------------- */
-/*                                   HEADER                                   */
-/* -------------------------------------------------------------------------- */
 
 header {
-    display: flex;
-    flex-wrap: wrap-reverse;
-    gap: 1rem;
-    background-color: var(--colour-secondary);
-    width: 100vw;
-    padding: 1rem;
-    box-sizing: border-box;
-    box-shadow: 0 var(--box-shadow-size) var(--box-shadow-size) var(--colour-shadow);
-    text-wrap: nowrap;
-    border-bottom: 1px solid var(--colour-border);
-}
-
-header > div {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-header h1 {
-    margin: 0;
-}
-
-.header-logo {
-    height: 2rem;
-    display: inline;
-    margin-right: 1rem;
-}
-
-header > div > a.st-andrews {
-    text-decoration: none;
-    width: 100%;
-    display: flex;
-}
-
-header nav {
-    color: inherit
-}
-
-header nav a {
-    display: inline-block;
-    text-decoration: inherit;
-    color: inherit;
-    margin-right: 1rem;
-    border: 1px solid var(--colour-border);
-    box-sizing: border-box;
-    padding: .4rem .7rem;
-}
-
-header nav a:hover {
-    color: var(--colour-text-secondary);
-    background-color: var(--colour-primary);
-}
-
-/* -------------------------------------------------------------------------- */
-/*                                   FOOTER                                   */
-/* -------------------------------------------------------------------------- */
-
-footer {
-    background-color: var(--colour-secondary);
-    border-top: 1px solid var(--colour-border);
-    padding: .5rem 1rem;
-    box-shadow: 0 0 var(--box-shadow-size) var(--colour-shadow);
-}
-
-footer a:hover {
-    color: var(--colour-text-shade);
-}
-
-/* -------------------------------------------------------------------------- */
-/*                                  ELEMENTS                                  */
-/* -------------------------------------------------------------------------- */
-
-h1 {
+    padding: 20px;
     font-size: 1.5rem;
-    margin: 0 0 1rem 0;
+    border-bottom: 3px solid var(--accent-colour);
 }
 
-h2 {
-    font-size: 1.3rem;
-    margin: 0 0 1rem 0;
+header p {
+    font-size: 1.2rem;
 }
 
-li {
-    margin-top: .5rem;
-}
-
-a {
-    color: inherit;
-    transition: var(--transition-time);
-}
-
-.no-decor {
-    text-decoration: inherit;
-    color: inherit;
-}
-
-button {
-    width: 10rem;
-    padding: .7rem;
-    margin: .7rem 0;
-    font-size: 1.1rem;
-    border: 1px solid var(--colour-border);
-    background-color: var(--colour-primary);
-    color: var(--colour-text-secondary);
-    cursor: pointer;
-    transition: var(--transition-time);
-}
-
-button.remove {
-    background-color: var(--colour-danger);
+nav {
     margin-top: 2rem;
 }
 
-button:hover {
-    background-color: var(--colour-secondary);
-    color: var(--colour-text);
+nav ul {
+    list-style: none;
+    padding: 0;
 }
 
-button:active {
-    background-color: var(--colour-accent);
+nav ul li {
+    display: inline;
+    margin: 0 15px;
 }
 
-textarea {
-    height: 10rem;
+nav a {
+    padding: 10px;
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                    FORM                                    */
-/* -------------------------------------------------------------------------- */
-
-form {
-    max-width: 30rem;
-    background-color: var(--colour-background-darkened);
-    margin: 0 auto;
-    padding: 2rem;
-    border: 1px solid var(--colour-border);
-    box-shadow: var(--box-shadow-size) var(--box-shadow-size) var(--box-shadow-size) var(--colour-shadow);
+a:not(.tile) {
+    color: var(--accent-colour);
+    text-decoration: none;
+    transition: ease 0.2s;
 }
 
-form input, form textarea, form select, form button {
+a:not(.tile):hover {
+    text-decoration: underline;
+}
+
+section {
+    padding: 20px;
+}
+
+a.tile {
+    text-decoration: none;
+    color: var(--text-colour);
+}
+
+div.tile {
+    background: var(--tile-bg);
+    border: 3px solid var(--tile-border);
+    padding: 15px;
+    margin: 15px auto;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 5px 5px 0 var(--tile-shadow);
+    text-transform: uppercase;
+    transition: ease-in 0.1s;
+}
+
+div.tile:hover {
+    scale: 1.01;
+    cursor: pointer;
+}
+
+footer {
+    margin-top: 20px;
+    padding: 10px;
+    border-top: 3px solid var(--accent-colour);
+}
+
+div.name {
+    position: relative;
+    display: inline-block;
+}
+
+span.pronouns {
+    position: absolute;
+    color: var(--accent-colour);
+    font-size: 1rem;
+    bottom: 2.6rem;
+    right: -6rem;
+}
+
+div.blog-wrapper {
+    max-width: 800px;
     width: 100%;
+    margin: 0 auto;
+    text-align: left;
+    padding: 1rem;
     box-sizing: border-box;
-    resize: none;
-    padding: .7rem;
-    margin: .7rem 0;
-    font-size: 1.1rem;
 }
 
-input, textarea, select {
-    background-color: var(--colour-background);
-    border: 1px solid var(--colour-border);
-    color: var(--colour-text);
-    box-shadow: inset .1rem .1rem .1rem var(--colour-shadow);
-    min-width: 5rem;
+div.blog-wrapper h1 {
+    text-align: center;
 }
 
-input:focus, textarea:focus, select:focus {
-    border-color: var(--colour-primary);
-    outline: none;
-    box-shadow: 0 0 .1rem var(--colour-primary);
+div.text-center {
+    text-align: center;
 }
 
 /* ========================================================================== */
@@ -250,18 +144,18 @@ input:focus, textarea:focus, select:focus {
     top: 50vh;
     left: 50vw;
     transform: translate(-50%, -50%);
-  }
-  @keyframes animloader {
+}
+@keyframes animloader {
     0% {
-      border-color: var(--colour-secondary) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+        border-color: var(--secondary-colour) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
     }
     33% {
-      border-color: var(--colour-secondary) var(--colour-secondary) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+        border-color: var(--secondary-colour) var(--secondary-colour) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
     }
     66% {
-      border-color: var(--colour-secondary) var(--colour-secondary) var(--colour-secondary) rgba(255, 255, 255, 0);
+        border-color: var(--secondary-colour) var(--secondary-colour) var(--secondary-colour) rgba(255, 255, 255, 0);
     }
     100% {
-      border-color: var(--colour-secondary) var(--colour-secondary) var(--colour-secondary) var(--colour-secondary);
+        border-color: var(--secondary-colour) var(--secondary-colour) var(--secondary-colour) var(--secondary-colour);
     }
-  } 
+}

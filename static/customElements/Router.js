@@ -36,12 +36,19 @@ class Router extends Route {
         // on location change
         window.addEventListener('pushstate', () => {
             this.loadPage();
+            const anchorID = window.location.hash.substring(1);
+            if (anchorID !== "") {
+                const anchor = document.getElementById(anchorID);
+                if (anchor) {
+                    anchor.scrollIntoView({behavior: "smooth"});
+                }
+            }
         })
 
         // this.loadPage(); // commenting this out, as i think index.js should be responsible for calling this
     }
 
-    loadPage() {
+    async loadPage() {
         const route = super.getRouteByPath(window.location.pathname);
         let page = route?.element;
 
@@ -55,7 +62,7 @@ class Router extends Route {
 
         // execute the onLoad method - if there is one
         if (route?.onLoad) {
-            if (route.onLoad(route.element) === 404) {
+            if (await route.onLoad(route.element) === 404) {
                 // the onLoad method indicated that a resource that we tried to retrieve does not exist.
                 page = this.page404;
             }
@@ -72,7 +79,7 @@ class Router extends Route {
         }
 
         // ensure page is scrolled to top
-        document.querySelector('div#below-header').scrollTo(0, 0);
+        // document.querySelector('div#below-header').scrollTo(0, 0);
     }
 }
 

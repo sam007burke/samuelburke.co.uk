@@ -3,109 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" src="/static/index.js"></script>
+    <title>Sam Bugg-Burke</title>
     <link rel="stylesheet" href="/static/styles.css">
-    <title>Dead Media</title>
+    <script type="module" src="/static/index.js"></script>
 </head>
 <body>
+<header>
+    <div class="name">
+        <h1>Sam Bugg-Burke</h1>
+        <span class="pronouns">(he/him)</span>
+    </div>
+    <p>Computer Science Student</p>
+    <p>London | St Andrews</p>
+</header>
 
-    <!-- ======================================================================= -->
-    <!--                                SPA ROUTER                               -->
-    <!-- ======================================================================= -->
-    <spa-router hidden path="/" element="home">
-        <spa-route path="/blogs">
-            <spa-route path="/*" element="blog"></spa-route>
-        </spa-route>
-        <!-- <spa-route path="/media">
-            <spa-route path="/*" element="media-page"></spa-route>
-        </spa-route>
-        <spa-route path="/add-media" element="add-media"></spa-route>
-        <spa-route path="/edit-media">
-            <spa-route path="/*" element="edit-media"></spa-route>
-        </spa-route> -->
-    </spa-router>
+<nav>
+    <ul>
+        <li><a spa href="/#about">About</a></li>
+        <li><a spa href="/#projects">Projects</a></li>
+        <li><a spa href="/#contact">Contact</a></li>
+    </ul>
+</nav>
 
-    <!-- ======================================================================= -->
-    <!--                                 HEADER                                  -->
-    <!-- Appears at the top of the page at all times, regardless of how far
-         the page content has been scrolled.                                     -->
-    <!-- ======================================================================= -->
-    <header>
-        <div class="flex-grow">
-            <a spa href="/" class="no-decor">
-                <h1>Sam Bugg-Burke is cool</h1>
+<main>
+    <noscript>Enable JS you fuckwit.</noscript>
+    <!--
+    CONTENT GOES IN HERE
+    -->
+</main>
+
+<footer>
+    <p>&copy; 2025 Samuel Bugg-Burke. All rights reserved.</p>
+</footer>
+
+<!-- ======================================================================= -->
+<!--   COMPONENTS - THESE ARE NOT DISPLAYED AND ARE REMOVED BY THE ROUTER    -->
+<!-- Components must be direct children of div#components. They must have
+     an id, and they must be divs themselves.                                -->
+<!-- ======================================================================= -->
+<div hidden id="components">
+
+<!-- ============================== HOME PAGE ============================== -->
+<div id="home">
+    <div class="content">
+        <section id="about">
+            <div class="blog-wrapper text-center">
+                <h2>About Me</h2>
+                <p>
+                    Hi, I'm Sam, a second year Computer Science student at the University of St Andrews.
+                    Here you will find some of the projects I've been working on, including some
+                    coursework if I think its interesting enough.
+                </p>
+                <p>
+                    My interests include computer graphics, video game development and Linux.
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <a spa href="blogs/race2" class="tile">
+                <div class="tile">
+                    <h3>Hitch-Hiking Race Tracker</h3>
+                    <p>A bespoke React app that tracks teams in a hitch-hiking race across Europe.</p>
+                </div>
             </a>
-            <nav>
-                <!-- <a href="#/">Media</a>
-                <a href="#/add-media">Add Media</a> -->
-            </nav>
-        </div>
-    </header>
+            <a spa href="blogs/game-engine" class="tile">
+                <div class="tile">
+                    <h3>Game Engine with SDL2 & OpenGL</h3>
+                    <p>A custom game engine built in C++, because no one told me not to.</p>
+                </div>
+            </a>
+            <a spa href="blogs/this-site" class="tile">
+                <div class="tile">
+                    <h3>This Website</h3>
+                    <p>I'm going to be honest, I'm not a webdev fan. But hey, here is a website!</p>
+                </div>
+            </a>
+        </section>
 
-    <!-- ======================== REST OF VISIBLE PAGE ========================= -->
-    <div id="below-header">
-        <div id="main-and-footer">
-
-            <!-- ======================================================================= -->
-            <!--                              MAIN CONTENT                               -->
-            <!-- This is the content that is controlled by the router. The components
-                 defined later in this document are inserted into the main tag.          -->
-            <!-- ======================================================================= -->
-            <main>
-                <noscript>Enable javascript to view this page.</noscript>
-            </main>
-
-            <!-- ======================================================================= -->
-            <!--                                 FOOTER                                  -->
-            <!-- Always appears at the bottom of the page, after the end of <main>.      -->
-            <!-- ======================================================================= -->
-            <footer>
-                <h2>Yeah I built this site in pure HTML/CSS/JS...</h2>
-                <p>...and if you don't like that you can bugger off! (Who even likes ReactJS anyway?)</p>
-            </footer>
-        </div>
+        <section id="contact">
+            <h2>Contact</h2>
+            <p><a href="mailto:samuelpburke@outlook.com">samuelpburke@outlook.com</a></p>
+            <p><a href="https://github.com/sam007burke">github.com/sam007burke</a></p>
+            <p><a href="https://www.linkedin.com/in/samuel-bugg-burke-811364245/">linkedin.com</a></p>
+        </section>
     </div>
+</div>
 
-    <!-- ======================================================================= -->
-    <!--   COMPONENTS - THESE ARE NOT DISPLAYED AND ARE REMOVED BY THE ROUTER    -->
-    <!-- Components must be direct children of div#components. They must have
-         an id, and they must be divs themselves.                                -->
-    <!-- ======================================================================= -->
-    <div hidden id="components">
+<!-- ============================== BLOG PAGE ============================== -->
+<div id="blog">
+    <div class="content"></div>
+</div>
 
-        <!-- ============================== HOME PAGE ============================== -->
-        <div id="home">
-            <div class="content">
-                <p>Hello, World!</p>
-                <a spa href="/blogs/this-site">This site (test)</a>
-            </div>
-        </div>
-
-        <!-- ============================== BLOG PAGE ============================== -->
-        <div id="blog">
-            <div class="content"></div>
-        </div>
-
-        <!-- ============================== 404 PAGE =============================== -->
-        <div id="page404">
-            <div class="content">
-                <h1>Error 404</h1>
-                <p>The requested resource was not found.</p>
-            </div>
-        </div>
+<!-- ============================== 404 PAGE =============================== -->
+<div id="page404">
+    <div class="content">
+        <h1>Error 404</h1>
+        <p>The requested resource was not found.</p>
     </div>
-    <!-- ======================================================================= -->
+</div>
+</div>
 
-    <!-- ======================================================================= -->
-    <!--                            ADDITIONAL SHITE                             -->
-    <!-- Like other components that are not exclusive to a page etc...           -->
-    <!-- ======================================================================= -->
-    <div hidden id="additional-components">
+<!-- ======================================================================= -->
+<!--                            ADDITIONAL SHITE                             -->
+<!-- Like other components that are not exclusive to a page etc...           -->
+<!-- ======================================================================= -->
+<div hidden id="additional-components">
 
-        <!-- =============================== LOADER ================================ -->
-        <div id="loader">
-            <span class="loader"></span>
-        </div>
+    <!-- =============================== LOADER ================================ -->
+    <div id="loader">
+        <span class="loader"></span>
     </div>
+</div>
+
+<!-- ======================================================================= -->
+<!--                                SPA ROUTER                               -->
+<!-- ======================================================================= -->
+<spa-router hidden path="/" element="home">
+    <spa-route path="/blogs">
+        <spa-route path="/*" element="blog"></spa-route>
+    </spa-route>
+</spa-router>
+
 </body>
 </html>

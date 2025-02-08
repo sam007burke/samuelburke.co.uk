@@ -1,4 +1,5 @@
 import { onCreates, onLoads } from "../componentMethods.js";
+import {defineAnchorBehaviour} from "../index.js";
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
@@ -38,14 +39,7 @@ class Route extends HTMLElement {
         }
 
         if (this.element) {
-            // Stop a[spa] tags from reloading the page
-            this.element.querySelectorAll("a[spa]").forEach(aTag => {
-                aTag.onclick = e => {
-                    e.preventDefault();
-                    console.log("navigating to spa page: " + aTag.href)
-                    history.pushState({}, "", aTag.href);
-                };
-            });
+            defineAnchorBehaviour(this.element);
         }
     }
 
